@@ -1,16 +1,38 @@
-﻿string name = "Ewa";
-string sex = "Kobieta";
-int age = 19;
+﻿// Exercise 5
+// Count the number of occurences of each digit in a chosen number.
 
-if (age < 30 && sex == "Kobieta")
+long number = 772366991;
+
+string numberAsString = number.ToString();
+char[] numberAsArray = numberAsString.ToCharArray();
+char[] uniqueNumbers = numberAsArray.Distinct().ToArray();
+
+char firstASCIICharacterAfterDigits = ':';
+
+for (char digit = '0'; digit < firstASCIICharacterAfterDigits; digit++)
 {
-    Console.WriteLine("Kobieta poniżej 30 roku życia");
-}
-else if (name == "Ewa" && age == 30)
-{
-    Console.WriteLine($"{name}, lat {age}");
-}
-else if (age < 18 && sex == "Mężczyzna")
-{
-    Console.WriteLine("Niepełnoletni mężczyzna");
+    bool isInNumber = false;
+
+    foreach (char c in uniqueNumbers)
+    {
+        if (c == digit)
+        {
+            isInNumber = true;
+        }
+    }
+
+    int counter = 0;
+
+    if (isInNumber)
+    {
+        foreach (char c in numberAsArray)
+        {
+            if (c == digit)
+            {
+                counter++;
+            }
+        }
+    }
+
+    Console.WriteLine($"{digit} => {counter}");
 }
