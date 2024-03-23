@@ -12,7 +12,7 @@ namespace ChallengeApplication
         public string Surname { get; set; }
         public int Age { get; set; }
 
-        public List<int> Grades = new List<int>();
+        public List<int> grades = new List<int>();
 
         public Employee(string name, string surname, int age)
         {
@@ -25,15 +25,15 @@ namespace ChallengeApplication
         {
             if (grade > 10)
             {
-                Grades.Add(10);
+                grades.Add(10);
             }
             else if (grade < -10)
             {
-                Grades.Add(-10);
+                grades.Add(-10);
             }
             else
             {
-                Grades.Add(grade);
+                grades.Add(grade);
             }
         }
 
@@ -41,7 +41,7 @@ namespace ChallengeApplication
         {
             int sum = 0;
 
-            foreach (var grade in Grades)
+            foreach (var grade in grades)
             {
                 sum += grade;
             }
