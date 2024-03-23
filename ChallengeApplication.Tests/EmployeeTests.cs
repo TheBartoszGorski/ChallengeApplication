@@ -6,15 +6,15 @@ namespace ChallengeApplication.Tests
         public void SumTheEmployeeGrades()
         {
             //Arrange
-            Employee TestEmployee = new Employee("£ukasz", "Michalski");
+            Employee testEmployee = new Employee("£ukasz", "Michalski");
 
             //Act
-            TestEmployee.AddGrade(7);
-            TestEmployee.AddGrade(8);
-            TestEmployee.AddGrade(3);
+            testEmployee.AddGrade(7);
+            testEmployee.AddGrade(8);
+            testEmployee.AddGrade(3);
 
             //assert
-            Assert.That(TestEmployee.GetGradeSum(), Is.EqualTo(18));
+            Assert.That(testEmployee.GetGradeSum(), Is.EqualTo(18));
         }
 
         [Test]
