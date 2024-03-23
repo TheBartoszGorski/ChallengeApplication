@@ -1,6 +1,6 @@
 namespace ChallengeApplication.Tests
 {
-    public class Tests
+    public class EmployeeTests
     {
         [Test]
         public void SumTheEmployeeGrades()
