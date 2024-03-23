@@ -23,13 +23,13 @@ namespace ChallengeApplication
 
         public void AddGrade(int grade)
         {
-            if (grade < 0)
-            {
-                Grades.Add(0);
-            }
-            else if (grade > 10)
+            if (grade > 10)
             {
                 Grades.Add(10);
+            }
+            else if (grade < -10)
+            {
+                Grades.Add(-10);
             }
             else
             {
