@@ -8,28 +8,26 @@ namespace ChallengeApplication
 {
     public class Employee
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public int Age { get; set; }
+        public string Name { get; private set; }
+        public string Surname { get; private set; }
 
-        private List<int> grades = new List<int>();
+        private List<float> grades = new List<float>();
 
-        public Employee(string name, string surname, int age)
+        public Employee(string name, string surname)
         {
             this.Name = name;
             this.Surname = surname;
-            this.Age = age;
         }
 
-        public void AddGrade(int grade)
+        public void AddGrade(float grade)
         {
-            if (grade > 10)
+            if (grade > 100)
             {
-                grades.Add(10);
+                grades.Add(100);
             }
-            else if (grade < -10)
+            else if (grade < 0)
             {
-                grades.Add(-10);
+                grades.Add(0);
             }
             else
             {
@@ -37,9 +35,9 @@ namespace ChallengeApplication
             }
         }
 
-        public int GetGradeSum()
+        public float GetGradeSum()
         {
-            int sum = 0;
+            float sum = 0;
 
             foreach (var grade in grades)
             {
@@ -49,11 +47,31 @@ namespace ChallengeApplication
             return sum;
         }
 
+        public Statistics GetStatistics()
+        {
+            Statistics statistics = new Statistics();
+            statistics.Min = float.MaxValue;
+            statistics.Max = float.MinValue;
+            foreach (float grade in grades)
+            {
+                if (grade < statistics.Min)
+                {
+                    statistics.Min = grade;
+                }
+
+                if (grade > statistics.Max)
+                {
+                    statistics.Max = grade;
+                }
+            }
+            statistics.Average = this.GetGradeSum() / grades.Count;
+
+            return statistics;
+        }
         public void DisplayEmployeeInformation()
         {
             Console.WriteLine($"Name: {Name}");
             Console.WriteLine($"Surname: {Surname}");
-            Console.WriteLine($"Age: {Age}");
             Console.WriteLine($"Employee score: {this.GetGradeSum()}");
         }
     }
