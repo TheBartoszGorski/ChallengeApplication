@@ -21,18 +21,38 @@ namespace ChallengeApplication
 
         public void AddGrade(float grade)
         {
-            if (grade > 100)
-            {
-                grades.Add(100);
-            }
-            else if (grade < 0)
-            {
-                grades.Add(0);
-            }
-            else
+            if (grade <= 100 || grade > 0)
             {
                 grades.Add(grade);
             }
+            else
+            {
+                Console.WriteLine("The grade cannot be lower than 0 or higher than 100.");
+            }
+        }
+
+        public void AddGrade(string grade)
+        {
+            float result;
+            if (float.TryParse(grade, out result))
+            {
+                this.AddGrade(result);
+            }
+            else
+            {
+                Console.WriteLine("Wrong string format.");
+            }
+
+        }
+
+        public void AddGrade(int grade)
+        {
+            this.AddGrade((float)grade);
+        }
+
+        public void AddGrade(long grade)
+        {
+            this.AddGrade((float)grade);
         }
 
         public float GetGradeSum()

@@ -3,7 +3,7 @@ using ChallengeApplication;
 
 Employee employee1 = new Employee("Adam", "Mickiwicz");
 
-employee1.AddGrade(3);
+employee1.AddGrade("3");
 employee1.AddGrade(41);
 employee1.AddGrade((float)34.5);
 employee1.AddGrade(16);
