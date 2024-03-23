@@ -12,7 +12,7 @@ namespace ChallengeApplication
         public string Surname { get; set; }
         public int Age { get; set; }
 
-        public List<int> grades = new List<int>();
+        private List<int> grades = new List<int>();
 
         public Employee(string name, string surname, int age)
         {
