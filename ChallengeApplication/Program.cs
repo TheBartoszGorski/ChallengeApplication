@@ -5,31 +5,38 @@ class Program
 {
     static void Main(string[] args)
     {
-        Employee employee = new Employee("Adam", "Mickiwicz");
+        Console.WriteLine("Welcome to the employee grading program!");
+        Console.WriteLine("========================================");
 
-        employee.AddGrade("3");
-        employee.AddGrade(41);
-        employee.AddGrade(34.5f);
-        employee.AddGrade(16);
+        Employee employee = new Employee();
+        var employeeStatistics = new Statistics();
 
-        List<Statistics> employeeStatistics = new List<Statistics>();
-
-        employeeStatistics.Add(employee.GetStatisticsWithForeach());
-        employeeStatistics.Add(employee.GetStatisticsWithFor());
-        employeeStatistics.Add(employee.GetStatisticsWithWhile());
-        employeeStatistics.Add(employee.GetStatisticsWithDoWhile());
-
-        string[] methods = new string[4] { "Foreach", "For", "While", "DoWhile" };
-
-        int iteration = 0;
-        foreach (Statistics statistics in employeeStatistics)
+        while (true)
         {
-            Console.WriteLine(methods[iteration]);
-            Console.WriteLine($"Average: {statistics.Average:N2}");
-            Console.WriteLine($"Min: {statistics.Min}");
-            Console.WriteLine($"Max: {statistics.Max}");
-            Console.WriteLine();
-            iteration++;
+            Console.WriteLine("Add a grade for the employee: ");
+            var input = Console.ReadLine();
+            if (input == "q")
+            {
+                break;
+            }
+            else
+            {
+                employee.AddGrade(input);
+            }
+        }
+
+        employeeStatistics = employee.GetStatistics();
+        DisplayEmployeeStatistics(employeeStatistics);
+    }
+
+    static void DisplayEmployeeStatistics(Statistics employeeStatistics)
+    {
+        Console.WriteLine($"Total number of grades: {employeeStatistics.DataCount}");
+        if (employeeStatistics.DataCount > 0)
+        {
+            Console.WriteLine($"Min: {employeeStatistics.Min}");
+            Console.WriteLine($"Max: {employeeStatistics.Max}");
+            Console.WriteLine($"Average: {employeeStatistics.Average:N2}");
         }
     }
 }

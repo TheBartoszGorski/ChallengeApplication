@@ -3,7 +3,7 @@ namespace ChallengeApplication.Tests
     public class EmployeeTests
     {
         [Test]
-        public void SumTheEmployeeGrades()
+        public void Employee_GetGradeSum_ShouldReturnCorrectValue()
         {
             //Arrange
             Employee testEmployee = new Employee("£ukasz", "Michalski");
@@ -18,7 +18,7 @@ namespace ChallengeApplication.Tests
         }
 
         [Test]
-        public void GetStatisticsShouldReturnCorrectMin()
+        public void GetStatistics_ShouldReturnCorrectMin()
         {
             //Arrange
             Statistics statistics = new Statistics();
@@ -38,7 +38,7 @@ namespace ChallengeApplication.Tests
         }
 
         [Test]
-        public void GetStatisticsShouldReturnCorrectMax()
+        public void GetStatistics_ShouldReturnCorrectMax()
         {
             //Arrange
             Statistics statistics = new Statistics();
@@ -58,7 +58,7 @@ namespace ChallengeApplication.Tests
         }
 
         [Test]
-        public void GetStatisticsShouldReturnCorrectAverage()
+        public void GetStatistics_ShouldReturnCorrectAverage()
         {
             //Arrange
             Statistics statistics = new Statistics();
@@ -74,5 +74,34 @@ namespace ChallengeApplication.Tests
 
         }
 
+        [Test]
+        public void GetStatistics_ShouldInterpretCharGrades()
+        {
+            //Arrange
+            Statistics statistics = new Statistics();
+            Employee employee = new Employee();
+
+            //Act
+            employee.AddGrade('A');
+            employee.AddGrade('b');
+            employee.AddGrade(3);
+            statistics = employee.GetStatistics();
+            Assert.That(statistics.Average, Is.EqualTo(61));
+        }
+
+        [Test]
+        public void GetStatistics_ShouldInterpretStringGrades()
+        {
+            //Arrange
+            Statistics statistics = new Statistics();
+            Employee employee = new Employee();
+
+            //Act
+            employee.AddGrade("A");
+            employee.AddGrade("b");
+            employee.AddGrade(3);
+            statistics = employee.GetStatistics();
+            Assert.That(statistics.Average, Is.EqualTo(61));
+        }
     }
 }

@@ -13,15 +13,52 @@ namespace ChallengeApplication
 
         private List<float> grades = new List<float>();
 
+        public Employee()
+        {
+            this.Name = string.Empty;
+            this.Surname = string.Empty;
+        }
+
         public Employee(string name, string surname)
         {
             this.Name = name;
             this.Surname = surname;
         }
 
+        public void AddGrade(char grade)
+        {
+            switch (grade)
+            {
+                case 'A':
+                case 'a':
+                    this.AddGrade(100);
+                    break;
+                case 'B':
+                case 'b':
+                    this.AddGrade(80);
+                    break;
+                case 'C':
+                case 'c':
+                    this.AddGrade(60);
+                    break;
+                case 'D':
+                case 'd':
+                    this.AddGrade(40);
+                    break;
+                case 'E':
+                case 'e':
+                    this.AddGrade(20);
+                    break;
+                case 'F':
+                case 'f':
+                    this.AddGrade(0);
+                    break;
+            }
+        }
+
         public void AddGrade(float grade)
         {
-            if (grade <= 100 || grade > 0)
+            if (grade > 0 || grade <= 100)
             {
                 grades.Add(grade);
             }
@@ -33,10 +70,15 @@ namespace ChallengeApplication
 
         public void AddGrade(string grade)
         {
-            float result;
-            if (float.TryParse(grade, out result))
+            float resultFloat;
+            char resultChar;
+            if (float.TryParse(grade, out resultFloat))
             {
-                this.AddGrade(result);
+                this.AddGrade(resultFloat);
+            }
+            else if (char.TryParse(grade, out resultChar))
+            {
+                this.AddGrade(resultChar);
             }
             else
             {
@@ -47,12 +89,14 @@ namespace ChallengeApplication
 
         public void AddGrade(int grade)
         {
-            this.AddGrade((float)grade);
+            float gradeAsFloat = grade;
+            this.AddGrade(gradeAsFloat);
         }
 
         public void AddGrade(long grade)
         {
-            this.AddGrade((float)grade);
+            float gradeAsFloat = grade;
+            this.AddGrade(gradeAsFloat);
         }
 
         public float GetGradeSum()
@@ -70,123 +114,15 @@ namespace ChallengeApplication
         public Statistics GetStatistics()
         {
             Statistics statistics = new Statistics();
+            statistics.DataCount = grades.Count;
             statistics.Min = float.MaxValue;
             statistics.Max = float.MinValue;
 
             foreach (float grade in grades)
             {
-                if (grade < statistics.Min)
-                {
-                    statistics.Min = grade;
-                }
-
-                if (grade > statistics.Max)
-                {
-                    statistics.Max = grade;
-                }
+                statistics.Min = Math.Min(statistics.Min, grade);
+                statistics.Max = Math.Max(statistics.Max, grade);
             }
-
-            statistics.Average = this.GetGradeSum() / grades.Count;
-
-            return statistics;
-        }
-
-        public Statistics GetStatisticsWithForeach()
-        {
-            Statistics statistics = new Statistics();
-            statistics.Min = float.MaxValue;
-            statistics.Max = float.MinValue;
-
-            foreach (float grade in grades)
-            {
-                if (grade < statistics.Min)
-                {
-                    statistics.Min = grade;
-                }
-
-                if (grade > statistics.Max)
-                {
-                    statistics.Max = grade;
-                }
-            }
-
-            statistics.Average = this.GetGradeSum() / grades.Count;
-
-            return statistics;
-        }
-
-        public Statistics GetStatisticsWithFor()
-        {
-            Statistics statistics = new Statistics();
-            statistics.Min = float.MaxValue;
-            statistics.Max = float.MinValue;
-
-            for (int index = 0; index < grades.Count; index++)
-            {
-                if (grades[index] < statistics.Min)
-                {
-                    statistics.Min = grades[index];
-                }
-
-                if (grades[index] > statistics.Max)
-                {
-                    statistics.Max = grades[index];
-                }
-            }
-
-            statistics.Average = this.GetGradeSum() / grades.Count;
-
-            return statistics;
-        }
-
-        public Statistics GetStatisticsWithWhile()
-        {
-            Statistics statistics = new Statistics();
-            statistics.Min = float.MaxValue;
-            statistics.Max = float.MinValue;
-            int index = 0;
-
-            while (index < grades.Count)
-            {
-                if (grades[index] < statistics.Min)
-                {
-                    statistics.Min = grades[index];
-                }
-
-                if (grades[index] > statistics.Max)
-                {
-                    statistics.Max = grades[index];
-                }
-
-                index++;
-            }
-
-            statistics.Average = this.GetGradeSum() / grades.Count;
-
-            return statistics;
-        }
-
-        public Statistics GetStatisticsWithDoWhile()
-        {
-            Statistics statistics = new Statistics();
-            statistics.Min = float.MaxValue;
-            statistics.Max = float.MinValue;
-
-            int index = 0;
-            do
-            {
-                if (grades[index] < statistics.Min)
-                {
-                    statistics.Min = grades[index];
-                }
-
-                if (grades[index] > statistics.Max)
-                {
-                    statistics.Max = grades[index];
-                }
-
-                index++;
-            } while (index < grades.Count);
 
             statistics.Average = this.GetGradeSum() / grades.Count;
 
