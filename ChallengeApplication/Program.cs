@@ -1,17 +1,36 @@
-﻿// Exercise 6
+﻿using System;
 using ChallengeApplication;
 
-Employee employee1 = new Employee("Adam", "Mickiwicz");
+class Program
+{
+    static void Main(string[] args)
+    {
+        Employee employee = new Employee("Adam", "Mickiwicz");
 
-employee1.AddGrade("3");
-employee1.AddGrade(41);
-employee1.AddGrade((float)34.5);
-employee1.AddGrade(16);
+        employee.AddGrade("3");
+        employee.AddGrade(41);
+        employee.AddGrade(34.5f);
+        employee.AddGrade(16);
 
-var employeeOneStatistics = new Statistics();
-employeeOneStatistics = employee1.GetStatistics();
+        List<Statistics> employeeStatistics = new List<Statistics>();
 
-Console.WriteLine($"Average: {employeeOneStatistics.Average:N2}");
-Console.WriteLine($"Min: {employeeOneStatistics.Min}");
-Console.WriteLine($"Max: {employeeOneStatistics.Max}");
+        employeeStatistics.Add(employee.GetStatisticsWithForeach());
+        employeeStatistics.Add(employee.GetStatisticsWithFor());
+        employeeStatistics.Add(employee.GetStatisticsWithWhile());
+        employeeStatistics.Add(employee.GetStatisticsWithDoWhile());
+
+        string[] methods = new string[4] { "Foreach", "For", "While", "DoWhile" };
+
+        int iteration = 0;
+        foreach (Statistics statistics in employeeStatistics)
+        {
+            Console.WriteLine(methods[iteration]);
+            Console.WriteLine($"Average: {statistics.Average:N2}");
+            Console.WriteLine($"Min: {statistics.Min}");
+            Console.WriteLine($"Max: {statistics.Max}");
+            Console.WriteLine();
+            iteration++;
+        }
+    }
+}
 

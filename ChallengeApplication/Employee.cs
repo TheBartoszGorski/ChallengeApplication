@@ -72,6 +72,7 @@ namespace ChallengeApplication
             Statistics statistics = new Statistics();
             statistics.Min = float.MaxValue;
             statistics.Max = float.MinValue;
+
             foreach (float grade in grades)
             {
                 if (grade < statistics.Min)
@@ -84,10 +85,114 @@ namespace ChallengeApplication
                     statistics.Max = grade;
                 }
             }
+
             statistics.Average = this.GetGradeSum() / grades.Count;
 
             return statistics;
         }
+
+        public Statistics GetStatisticsWithForeach()
+        {
+            Statistics statistics = new Statistics();
+            statistics.Min = float.MaxValue;
+            statistics.Max = float.MinValue;
+
+            foreach (float grade in grades)
+            {
+                if (grade < statistics.Min)
+                {
+                    statistics.Min = grade;
+                }
+
+                if (grade > statistics.Max)
+                {
+                    statistics.Max = grade;
+                }
+            }
+
+            statistics.Average = this.GetGradeSum() / grades.Count;
+
+            return statistics;
+        }
+
+        public Statistics GetStatisticsWithFor()
+        {
+            Statistics statistics = new Statistics();
+            statistics.Min = float.MaxValue;
+            statistics.Max = float.MinValue;
+
+            for (int index = 0; index < grades.Count; index++)
+            {
+                if (grades[index] < statistics.Min)
+                {
+                    statistics.Min = grades[index];
+                }
+
+                if (grades[index] > statistics.Max)
+                {
+                    statistics.Max = grades[index];
+                }
+            }
+
+            statistics.Average = this.GetGradeSum() / grades.Count;
+
+            return statistics;
+        }
+
+        public Statistics GetStatisticsWithWhile()
+        {
+            Statistics statistics = new Statistics();
+            statistics.Min = float.MaxValue;
+            statistics.Max = float.MinValue;
+            int index = 0;
+
+            while (index < grades.Count)
+            {
+                if (grades[index] < statistics.Min)
+                {
+                    statistics.Min = grades[index];
+                }
+
+                if (grades[index] > statistics.Max)
+                {
+                    statistics.Max = grades[index];
+                }
+
+                index++;
+            }
+
+            statistics.Average = this.GetGradeSum() / grades.Count;
+
+            return statistics;
+        }
+
+        public Statistics GetStatisticsWithDoWhile()
+        {
+            Statistics statistics = new Statistics();
+            statistics.Min = float.MaxValue;
+            statistics.Max = float.MinValue;
+
+            int index = 0;
+            do
+            {
+                if (grades[index] < statistics.Min)
+                {
+                    statistics.Min = grades[index];
+                }
+
+                if (grades[index] > statistics.Max)
+                {
+                    statistics.Max = grades[index];
+                }
+
+                index++;
+            } while (index < grades.Count);
+
+            statistics.Average = this.GetGradeSum() / grades.Count;
+
+            return statistics;
+        }
+
         public void DisplayEmployeeInformation()
         {
             Console.WriteLine($"Name: {Name}");
