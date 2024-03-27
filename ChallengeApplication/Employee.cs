@@ -6,17 +6,23 @@ using System.Threading.Tasks;
 
 namespace ChallengeApplication
 {
-    public class Employee : Person
+    public class Employee : IEmployee
     {
-        public List<float> grades = new List<float>();
-        public Employee() : base()
-        {
+        public string Name { get; set; }
+        public string Surname { get; set; }
 
+        public List<float> grades = new List<float>();
+
+        public Employee()
+        {
+            this.Name = "";
+            this.Surname = "";
         }
 
-        public Employee(string name, string surname) : base(name, surname)
+        public Employee(string name, string surname)
         {
-
+            this.Name = name;
+            this.Surname = surname;
         }
 
         public void AddGrade(char grade)

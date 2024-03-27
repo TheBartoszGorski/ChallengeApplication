@@ -8,12 +8,12 @@ class Program
         Console.WriteLine("Welcome to the employee grading program!");
         Console.WriteLine("========================================");
 
-        Employee employee = new Employee();
-        var employeeStatistics = new Statistics();
+        Supervisor supervisor = new Supervisor("Albert", "Kowalski");
+        var supervisorStatistics = new Statistics();
 
         while (true)
         {
-            Console.WriteLine("Add a grade for the employee: ");
+            Console.WriteLine("Add a grade for the supervisor: ");
             var input = Console.ReadLine();
             if (input == "q")
             {
@@ -23,27 +23,27 @@ class Program
             {
                 try 
                 {
-                    employee.AddGrade(input);
+                    supervisor.AddGrade(input);
                 }
                 catch (Exception ex) 
                 {
-                    Console.WriteLine($"Exception catched: {ex.Message}");
+                    Console.WriteLine($"Exception catched:{ex.Message}");
                 }
             }
         }
 
-        employeeStatistics = employee.GetStatistics();
-        DisplayEmployeeStatistics(employeeStatistics);
+        supervisorStatistics = supervisor.GetStatistics();
+        DisplayStatistics(supervisorStatistics);
     }
 
-    static void DisplayEmployeeStatistics(Statistics employeeStatistics)
+    static void DisplayStatistics(Statistics statistics)
     {
-        Console.WriteLine($"Total number of grades: {employeeStatistics.DataCount}");
-        if (employeeStatistics.DataCount > 0)
+        Console.WriteLine($"Total number of grades: {statistics.DataCount}");
+        if (statistics.DataCount > 0)
         {
-            Console.WriteLine($"Min: {employeeStatistics.Min}");
-            Console.WriteLine($"Max: {employeeStatistics.Max}");
-            Console.WriteLine($"Average: {employeeStatistics.Average:N2}");
+            Console.WriteLine($"Min: {statistics.Min}");
+            Console.WriteLine($"Max: {statistics.Max}");
+            Console.WriteLine($"Average: {statistics.Average:N2}");
         }
     }
 }
