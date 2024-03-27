@@ -21,7 +21,14 @@ class Program
             }
             else
             {
-                employee.AddGrade(input);
+                try 
+                {
+                    employee.AddGrade(input);
+                }
+                catch (Exception ex) 
+                {
+                    Console.WriteLine($"Exception catched: {ex.Message}");
+                }
             }
         }
 

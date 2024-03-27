@@ -53,18 +53,20 @@ namespace ChallengeApplication
                 case 'f':
                     this.AddGrade(0);
                     break;
+                default:
+                    throw new ArgumentException("Given symbol is outside the grading scope.");
             }
         }
 
         public void AddGrade(float grade)
         {
-            if (grade > 0 || grade <= 100)
+            if (grade > 0 && grade <= 100)
             {
                 grades.Add(grade);
             }
             else
             {
-                Console.WriteLine("The grade cannot be lower than 0 or higher than 100.");
+                throw new ArgumentException("The grade cannot be lower than 0 or higher than 100.");
             }
         }
 
@@ -82,7 +84,7 @@ namespace ChallengeApplication
             }
             else
             {
-                Console.WriteLine("Wrong string format.");
+                throw new ArgumentException("Wrong string format.");
             }
 
         }
