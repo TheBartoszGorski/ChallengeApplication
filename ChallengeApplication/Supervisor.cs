@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,37 +21,9 @@ namespace ChallengeApplication
 
         public void AddGrade(char grade)
         {
-            switch (grade)
-            {
-                case 'A':
-                case 'a':
-                    this.AddGrade(100);
-                    break;
-                case 'B':
-                case 'b':
-                    this.AddGrade(80);
-                    break;
-                case 'C':
-                case 'c':
-                    this.AddGrade(60);
-                    break;
-                case 'D':
-                case 'd':
-                    this.AddGrade(40);
-                    break;
-                case 'E':
-                case 'e':
-                    this.AddGrade(20);
-                    break;
-                case 'F':
-                case 'f':
-                    this.AddGrade(0);
-                    break;
-                default:
-                    throw new ArgumentException("Given symbol is not a valid grade.");
-
-            }
-
+            float floatGrade = 0;
+            floatGrade = ConvertCharToGrade(grade);
+            this.grades.Add(floatGrade);
         }
 
         public void AddGrade(float grade)
@@ -61,7 +34,7 @@ namespace ChallengeApplication
             }
             else
             {
-                throw new ArgumentException("The grade cannot be lower than 0 or higher than 100.");
+                throw new ArgumentException("The grade cannot be lower than -5 or higher than 105.");
             }
         }
 
@@ -86,6 +59,7 @@ namespace ChallengeApplication
                 float plusOrMinusValue = 0;
                 float gradeValue = 0;
                 int digitsInGrade = 0;
+                int lettersInGrade = 0;
                 for (int i = 0; i < grade.Length; i++)
                 {
                     if (grade[i] == '+')
@@ -95,6 +69,11 @@ namespace ChallengeApplication
                     else if (grade[i] == '-')
                     {
                         plusOrMinusValue = -5;
+                    }
+                    else if (IsLetter(grade[i]))
+                    {
+                        gradeValue = ConvertCharToGrade(grade[i]);
+                        lettersInGrade++;
                     }
                     else
                     {
@@ -110,7 +89,7 @@ namespace ChallengeApplication
                     }
                 }
 
-                if (digitsInGrade < 2)
+                if (digitsInGrade < 2 && lettersInGrade < 2)
                 {
                     this.AddGrade(gradeValue + plusOrMinusValue);
                 }
@@ -165,7 +144,54 @@ namespace ChallengeApplication
 
             return sum;
         }
+        private bool IsLetter(char ANSICharacter)
+        {
+            for (char c = 'a'; c <= 'z'; c++)
+            {
+                if (c == ANSICharacter)
+                {
+                    return true;
+                }
+            }
 
+            for (char c = 'A'; c <= 'Z'; c++)
+            {
+                if (c == ANSICharacter)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        private float ConvertCharToGrade(char character)
+        {
+            switch (character)
+            {
+                case 'A':
+                case 'a':
+                    return 100;
+                case 'B':
+                case 'b':
+                    return 80;
+                case 'C':
+                case 'c':
+                    return 60;
+                case 'D':
+                case 'd':
+                    return 40;
+
+                case 'E':
+                case 'e':
+                    return 20;
+                case 'F':
+                case 'f':
+                    return 0;
+                default:
+                    throw new ArgumentException("Given symbol is not a valid grade.");
+
+            }
+        }
         private float ConvertFloatToGrade(float numberToConvert)
         {
             if (numberToConvert > 0 && numberToConvert < 7)
