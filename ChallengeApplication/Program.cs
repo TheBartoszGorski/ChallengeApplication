@@ -11,10 +11,10 @@ class Program
         var employee = new EmployeeInFile("Albert", "Kowalski");
         var employeeStatistics = new Statistics();
 
-        //employee.AddGrade('A');
-        //employee.AddGrade('B');
-        //employee.AddGrade('C');
-        //employee.AddGrade(7);
+        employee.AddGrade('A');
+        employee.AddGrade('B');
+        employee.AddGrade('C');
+        employee.AddGrade(7);
 
         employeeStatistics = employee.GetStatistics();
         DisplayStatistics(employeeStatistics);

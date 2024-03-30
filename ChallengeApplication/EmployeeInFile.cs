@@ -30,7 +30,7 @@ namespace ChallengeApplication
 
         public override void AddGrade(float grade)
         {
-            if (grade > 0 && grade < 100)
+            if (grade >= 0 && grade <= 100)
             {
                 using (var writer = File.AppendText(fileName))
                 {
