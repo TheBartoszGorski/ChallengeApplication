@@ -12,7 +12,7 @@ namespace ChallengeApplication
         public string Name { get; set; }
         public string Surname { get; set; }
 
-        public List<float> grades = new List<float>();
+        private List<float> grades = new List<float>();
         public Supervisor(string name, string surname)
         {
             this.Name = name;
@@ -23,7 +23,7 @@ namespace ChallengeApplication
         {
             float floatGrade = 0;
             floatGrade = ConvertCharToGrade(grade);
-            this.grades.Add(floatGrade);
+            this.AddGrade(floatGrade);
         }
 
         public void AddGrade(float grade)
@@ -180,7 +180,6 @@ namespace ChallengeApplication
                 case 'D':
                 case 'd':
                     return 40;
-
                 case 'E':
                 case 'e':
                     return 20;

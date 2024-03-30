@@ -6,45 +6,40 @@ using System.Threading.Tasks;
 
 namespace ChallengeApplication
 {
-    public class Employee : IEmployee
+    public class EmployeeInFile : EmployeeBase
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        private const string fileName = "grades.txt";
 
         private List<float> grades = new();
 
-        public Employee()
+        public EmployeeInFile()
+            : base()
         {
-            this.Name = "";
-            this.Surname = "";
+        }
+        public EmployeeInFile(string name, string surname)
+            : base(name, surname)
+        {
         }
 
-        public Employee(string name, string surname)
-        {
-            this.Name = name;
-            this.Surname = surname;
-        }
-
-        public void AddGrade(char grade)
+        public override void AddGrade(char grade)
         {
             float floatGrade = 0;
             floatGrade = ConvertCharToGrade(grade);
             this.AddGrade(floatGrade);
         }
 
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
-            if (grade > 0 && grade <= 100)
+            if (grade > 0 && grade < 100)
             {
-                grades.Add(grade);
-            }
-            else
-            {
-                throw new ArgumentException("The grade cannot be lower than 0 or higher than 100.");
+                using (var writer = File.AppendText(fileName))
+                {
+                    writer.WriteLine(grade);
+                }
             }
         }
 
-        public void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
             float resultFloat;
             char resultChar;
@@ -63,53 +58,55 @@ namespace ChallengeApplication
 
         }
 
-        public void AddGrade(int grade)
+        public override void AddGrade(int grade)
         {
             float gradeAsFloat = grade;
             this.AddGrade(gradeAsFloat);
         }
 
-        public void AddGrade(long grade)
+        public override void AddGrade(long grade)
         {
             float gradeAsFloat = grade;
             this.AddGrade(gradeAsFloat);
         }
 
-        public float GetGradeSum()
-        {
-            float sum = 0;
-
-            foreach (var grade in grades)
-            {
-                sum += grade;
-            }
-
-            return sum;
-        }
-
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             Statistics statistics = new Statistics();
-            statistics.DataCount = grades.Count;
-            statistics.Min = float.MaxValue;
-            statistics.Max = float.MinValue;
-
-            foreach (float grade in grades)
+            if (File.Exists(fileName))
             {
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Max = Math.Max(statistics.Max, grade);
+                statistics.Min = float.MaxValue;
+                statistics.Max = float.MinValue;
+
+                using (var reader = File.OpenText(fileName))
+                {
+                    var line = reader.ReadLine();
+                    while (line != null)
+                    {
+                        if (line == "")
+                        {
+                            line = reader.ReadLine();
+                            continue;
+                        }
+
+                        var number = float.Parse(line);
+                        grades.Add(number);
+                        line = reader.ReadLine();
+                    }
+                }
+
+                foreach (float grade in grades)
+                {
+                    statistics.Min = Math.Min(statistics.Min, grade);
+                    statistics.Max = Math.Max(statistics.Max, grade);
+                    statistics.Average += grade;
+                }
+
+                statistics.DataCount = grades.Count;
+                statistics.Average /= grades.Count;
             }
 
-            statistics.Average = this.GetGradeSum() / grades.Count;
-
             return statistics;
-        }
-
-        public void DisplayEmployeeInformation()
-        {
-            Console.WriteLine($"Name: {Name}");
-            Console.WriteLine($"Surname: {Surname}");
-            Console.WriteLine($"Employee score: {this.GetGradeSum()}");
         }
 
         private float ConvertCharToGrade(char character)
@@ -140,5 +137,4 @@ namespace ChallengeApplication
             }
         }
     }
-}
 }

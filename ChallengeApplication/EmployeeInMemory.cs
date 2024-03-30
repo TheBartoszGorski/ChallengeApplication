@@ -6,33 +6,26 @@ using System.Threading.Tasks;
 
 namespace ChallengeApplication
 {
-    public class Employee : IEmployee
+    public class EmployeeInMemory : EmployeeBase
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
-
         private List<float> grades = new();
-
-        public Employee()
+        public EmployeeInMemory()
+            : base()
         {
-            this.Name = "";
-            this.Surname = "";
+        }
+        public EmployeeInMemory(string name, string surname)
+            : base(name, surname)
+        {
         }
 
-        public Employee(string name, string surname)
-        {
-            this.Name = name;
-            this.Surname = surname;
-        }
-
-        public void AddGrade(char grade)
+        public override void AddGrade(char grade)
         {
             float floatGrade = 0;
             floatGrade = ConvertCharToGrade(grade);
             this.AddGrade(floatGrade);
         }
 
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             if (grade > 0 && grade <= 100)
             {
@@ -44,7 +37,7 @@ namespace ChallengeApplication
             }
         }
 
-        public void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
             float resultFloat;
             char resultChar;
@@ -63,13 +56,13 @@ namespace ChallengeApplication
 
         }
 
-        public void AddGrade(int grade)
+        public override void AddGrade(int grade)
         {
             float gradeAsFloat = grade;
             this.AddGrade(gradeAsFloat);
         }
 
-        public void AddGrade(long grade)
+        public override void AddGrade(long grade)
         {
             float gradeAsFloat = grade;
             this.AddGrade(gradeAsFloat);
@@ -87,7 +80,7 @@ namespace ChallengeApplication
             return sum;
         }
 
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             Statistics statistics = new Statistics();
             statistics.DataCount = grades.Count;
@@ -105,40 +98,32 @@ namespace ChallengeApplication
             return statistics;
         }
 
-        public void DisplayEmployeeInformation()
-        {
-            Console.WriteLine($"Name: {Name}");
-            Console.WriteLine($"Surname: {Surname}");
-            Console.WriteLine($"Employee score: {this.GetGradeSum()}");
-        }
-
         private float ConvertCharToGrade(char character)
         {
             switch (character)
             {
                 case 'A':
                 case 'a':
-                    return 100f;
+                    return 100;
                 case 'B':
                 case 'b':
-                    return 80f;
+                    return 80;
                 case 'C':
                 case 'c':
-                    return 60f;
+                    return 60;
                 case 'D':
                 case 'd':
-                    return 40f;
+                    return 40;
                 case 'E':
                 case 'e':
-                    return 20f;
+                    return 20;
                 case 'F':
                 case 'f':
-                    return 0f;
+                    return 0;
                 default:
                     throw new ArgumentException("Given symbol is not a valid grade.");
 
             }
         }
     }
-}
 }

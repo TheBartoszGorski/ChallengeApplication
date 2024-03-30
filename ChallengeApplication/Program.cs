@@ -8,32 +8,43 @@ class Program
         Console.WriteLine("Welcome to the employee grading program!");
         Console.WriteLine("========================================");
 
-        Supervisor supervisor = new Supervisor("Albert", "Kowalski");
-        var supervisorStatistics = new Statistics();
+        var employee = new EmployeeInFile("Albert", "Kowalski");
+        var employeeStatistics = new Statistics();
 
-        while (true)
-        {
-            Console.WriteLine("Add a grade for the supervisor: ");
-            var input = Console.ReadLine();
-            if (input == "q")
-            {
-                break;
-            }
-            else
-            {
-                try 
-                {
-                    supervisor.AddGrade(input);
-                }
-                catch (Exception ex) 
-                {
-                    Console.WriteLine($"Exception catched:{ex.Message}");
-                }
-            }
-        }
+        //employee.AddGrade('A');
+        //employee.AddGrade('B');
+        //employee.AddGrade('C');
+        //employee.AddGrade(7);
 
-        supervisorStatistics = supervisor.GetStatistics();
-        DisplayStatistics(supervisorStatistics);
+        employeeStatistics = employee.GetStatistics();
+        DisplayStatistics(employeeStatistics);
+
+        //Supervisor supervisor = new Supervisor("Albert", "Kowalski");
+        //var supervisorStatistics = new Statistics();
+
+        //while (true)
+        //{
+        //    Console.WriteLine("Add a grade for the supervisor: ");
+        //    var input = Console.ReadLine();
+        //    if (input == "q")
+        //    {
+        //        break;
+        //    }
+        //    else
+        //    {
+        //        try 
+        //        {
+        //            supervisor.AddGrade(input);
+        //        }
+        //        catch (Exception ex) 
+        //        {
+        //            Console.WriteLine($"Exception catched:{ex.Message}");
+        //        }
+        //    }
+        //}
+
+        //supervisorStatistics = supervisor.GetStatistics();
+        //DisplayStatistics(supervisorStatistics);
     }
 
     static void DisplayStatistics(Statistics statistics)
