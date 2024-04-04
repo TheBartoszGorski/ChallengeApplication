@@ -8,43 +8,18 @@ class Program
         Console.WriteLine("Welcome to the employee grading program!");
         Console.WriteLine("========================================");
 
-        var employee = new EmployeeInFile("Albert", "Kowalski");
+        var employee = new EmployeeInMemory("Albert", "Kowalski");
+        employee.GradeAdded += NotifyOnGradeAddition;
+        employee.AddGrade(3);
+        employee.AddGrade(5);
         var employeeStatistics = new Statistics();
-
-        employee.AddGrade('A');
-        employee.AddGrade('B');
-        employee.AddGrade('C');
-        employee.AddGrade(7);
-
         employeeStatistics = employee.GetStatistics();
         DisplayStatistics(employeeStatistics);
 
-        //Supervisor supervisor = new Supervisor("Albert", "Kowalski");
-        //var supervisorStatistics = new Statistics();
-
-        //while (true)
-        //{
-        //    Console.WriteLine("Add a grade for the supervisor: ");
-        //    var input = Console.ReadLine();
-        //    if (input == "q")
-        //    {
-        //        break;
-        //    }
-        //    else
-        //    {
-        //        try 
-        //        {
-        //            supervisor.AddGrade(input);
-        //        }
-        //        catch (Exception ex) 
-        //        {
-        //            Console.WriteLine($"Exception catched:{ex.Message}");
-        //        }
-        //    }
-        //}
-
-        //supervisorStatistics = supervisor.GetStatistics();
-        //DisplayStatistics(supervisorStatistics);
+        void NotifyOnGradeAddition(object sender, EventArgs args)
+        {
+            Console.WriteLine("Grade has been added.");
+        }
     }
 
     static void DisplayStatistics(Statistics statistics)

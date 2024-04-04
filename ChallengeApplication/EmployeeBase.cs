@@ -8,8 +8,11 @@ namespace ChallengeApplication
 {
     public abstract class EmployeeBase : IEmployee
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public delegate void GradeAddedDelagate(object sender, EventArgs args);
+
+        public abstract event GradeAddedDelagate GradeAdded;
+        public string Name { get; private set; }
+        public string Surname { get; private set; }
 
         public EmployeeBase()
         {
