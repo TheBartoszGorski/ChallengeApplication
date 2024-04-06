@@ -118,17 +118,7 @@ namespace ChallengeApplication
         public Statistics GetStatistics()
         {
             Statistics statistics = new Statistics();
-            statistics.DataCount = grades.Count;
-            statistics.Min = float.MaxValue;
-            statistics.Max = float.MinValue;
-
-            foreach (float grade in grades)
-            {
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Max = Math.Max(statistics.Max, grade);
-            }
-
-            statistics.Average = this.GetGradeSum() / grades.Count;
+            statistics.CalculateStatistics(grades);
 
             return statistics;
         }

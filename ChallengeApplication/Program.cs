@@ -8,13 +8,13 @@ class Program
         Console.WriteLine("Welcome to the employee grading program!");
         Console.WriteLine("========================================");
 
-        var employee = new EmployeeInMemory("Albert", "Kowalski");
+        var employee = new EmployeeInFile("Albert", "Kowalski");
         employee.GradeAdded += NotifyOnGradeAddition;
-        employee.AddGrade(3);
-        employee.AddGrade(5);
+        employee.AddGrade(70);
+        employee.AddGrade(15);
         var employeeStatistics = new Statistics();
         employeeStatistics = employee.GetStatistics();
-        DisplayStatistics(employeeStatistics);
+        employeeStatistics.DisplayEmployeeStatistics();
 
         void NotifyOnGradeAddition(object sender, EventArgs args)
         {

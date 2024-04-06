@@ -29,17 +29,17 @@
         public void ComparisonOfTwoReferenceTypes()
         {
             //Arrange
-            Employee firstEmployee = GetEmployee("A.", "Cwany");
-            Employee secondEmployee = GetEmployee("A.", "Cwany");
+            EmployeeInMemory firstEmployee = GetEmployee("A.", "Cwany");
+            EmployeeInMemory secondEmployee = GetEmployee("A.", "Cwany");
 
             //Assert
             Assert.That(firstEmployee, Is.Not.EqualTo(secondEmployee));
 
         }
 
-        private Employee GetEmployee(string name, string surname)
+        private EmployeeInMemory GetEmployee(string name, string surname)
         {
-            return new Employee(name, surname);
+            return new EmployeeInMemory(name, surname);
         }
     }
 }

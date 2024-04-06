@@ -80,14 +80,25 @@ namespace ChallengeApplication
         public override Statistics GetStatistics()
         {
             Statistics statistics = new Statistics();
+            GetGradesFromFile();
+            statistics.CalculateStatistics(grades);
+
+            return statistics;
+        }
+
+        private void GetGradesFromFile()
+        {
+            if (grades.Count > 0)
+            {
+                grades.Clear();
+            }
+
             if (File.Exists(fileName))
             {
-                statistics.Min = float.MaxValue;
-                statistics.Max = float.MinValue;
-
                 using (var reader = File.OpenText(fileName))
                 {
                     var line = reader.ReadLine();
+
                     while (line != null)
                     {
                         if (line == "")
@@ -101,19 +112,9 @@ namespace ChallengeApplication
                         line = reader.ReadLine();
                     }
                 }
-
-                foreach (float grade in grades)
-                {
-                    statistics.Min = Math.Min(statistics.Min, grade);
-                    statistics.Max = Math.Max(statistics.Max, grade);
-                    statistics.Average += grade;
-                }
-
-                statistics.DataCount = grades.Count;
-                statistics.Average /= grades.Count;
             }
 
-            return statistics;
+            return;
         }
 
         private float ConvertCharToGrade(char character)

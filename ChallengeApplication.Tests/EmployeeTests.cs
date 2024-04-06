@@ -6,7 +6,7 @@ namespace ChallengeApplication.Tests
         public void Employee_GetGradeSum_ShouldReturnCorrectValue()
         {
             //Arrange
-            Employee testEmployee = new Employee("£ukasz", "Michalski");
+            EmployeeInMemory testEmployee = new EmployeeInMemory("£ukasz", "Michalski");
 
             //Act
             testEmployee.AddGrade(7);
@@ -22,7 +22,7 @@ namespace ChallengeApplication.Tests
         {
             //Arrange
             Statistics statistics = new Statistics();
-            Employee employee = new Employee("Name", "Surname");
+            EmployeeInMemory employee = new EmployeeInMemory("Name", "Surname");
 
             //Act
             employee.AddGrade(5);
@@ -42,7 +42,7 @@ namespace ChallengeApplication.Tests
         {
             //Arrange
             Statistics statistics = new Statistics();
-            Employee employee = new Employee("Name", "Surname");
+            EmployeeInMemory employee = new EmployeeInMemory("Name", "Surname");
 
             //Act
             employee.AddGrade(5);
@@ -62,7 +62,7 @@ namespace ChallengeApplication.Tests
         {
             //Arrange
             Statistics statistics = new Statistics();
-            Employee employee = new Employee("Name", "Surname");
+            EmployeeInMemory employee = new EmployeeInMemory("Name", "Surname");
 
             //Act
             employee.AddGrade(2);
@@ -79,7 +79,7 @@ namespace ChallengeApplication.Tests
         {
             //Arrange
             Statistics statistics = new Statistics();
-            Employee employee = new Employee();
+            EmployeeInMemory employee = new EmployeeInMemory();
 
             //Act
             employee.AddGrade('A');
@@ -94,7 +94,7 @@ namespace ChallengeApplication.Tests
         {
             //Arrange
             Statistics statistics = new Statistics();
-            Employee employee = new Employee();
+            EmployeeInMemory employee = new EmployeeInMemory();
 
             //Act
             employee.AddGrade("A");
